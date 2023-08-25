@@ -12,7 +12,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val moviesLiveData: MutableLiveData<Kinopoisk> = MutableLiveData()
-
+    init {
+        getMovies()
+    }
     fun getMovies(){
         viewModelScope.launch {
             val response = repo.getMovies()

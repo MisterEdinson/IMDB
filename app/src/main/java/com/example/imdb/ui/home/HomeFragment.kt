@@ -15,6 +15,7 @@ class HomeFragment : Fragment() {
 
     val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
+    private var adapter: AdapterMovies? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,8 +26,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initAdapter()
         viewModel.moviesLiveData.observe(viewLifecycleOwner){
-
+            adapter?.list?.submitList(it.docs)
         }
+    }
+    private fun initAdapter(){
+        adapter = AdapterMovies()
+        binding.rvMovies.adapter = adapter
     }
 }
