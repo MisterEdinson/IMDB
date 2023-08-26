@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.imdb.R
+import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
         }
     }
     private fun initAdapter(){
-        adapter = AdapterMovies()
+        adapter = AdapterMovies({ favorite -> addFavorite(favorite)})
         binding.mainContainer.rvMovies.adapter = adapter
 
         adapterSort = AdapterSort(context, resources.getStringArray(R.array.sort_array))
@@ -80,6 +81,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun addFavorite(favorite: HomeMovieModel){
+        viewModel.insert(favorite)
     }
 
     private fun navigationDesc(){

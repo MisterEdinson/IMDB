@@ -10,6 +10,10 @@ import com.example.imdb.data.local.model.HomeMovieModel
 interface HomeMovieDao {
     @Query("SELECT * FROM home_movie WHERE title LIKE :search")
     suspend fun getHomeMovie(search: String): HomeMovieModel
+
+    @Query("SELECT * FROM home_movie")
+    suspend fun getAllFavorite(): List<HomeMovieModel>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHomeMovie(insert: HomeMovieModel)
 }

@@ -13,7 +13,9 @@ import com.example.imdb.data.network.model.kinopoisk.DocsItem
 import com.example.imdb.databinding.ItemMovieBinding
 import com.example.imdb.domain.util.loadImage
 
-class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
+class AdapterMovies(
+    val addFavorite: (HomeMovieModel) -> Unit
+) : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     private lateinit var binding: ItemMovieBinding
 
@@ -27,8 +29,6 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
         override fun areContentsTheSame(oldItem: HomeMovieModel, newItem: HomeMovieModel): Boolean {
             return oldItem.title == newItem.title
         }
-
-
     }
     val list = AsyncListDiffer(this, callback)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesHolder {
@@ -54,7 +54,7 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
                 }
 
                 imgFavorite.setOnClickListener {
-                    Toast.makeText(root.context, item.title.toString(), Toast.LENGTH_SHORT).show()
+                    addFavorite(item)
                 }
             }
         } ?: {
