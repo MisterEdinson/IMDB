@@ -15,9 +15,10 @@ import com.example.imdb.domain.util.loadImage
 class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     private lateinit var binding: ItemMovieBinding
+
     class MoviesHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    val callback = object : DiffUtil.ItemCallback<DocsItem>(){
+    val callback = object : DiffUtil.ItemCallback<DocsItem>() {
         override fun areItemsTheSame(oldItem: DocsItem, newItem: DocsItem): Boolean {
             return oldItem.id == newItem.id
         }
@@ -39,18 +40,22 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     override fun onBindViewHolder(holder: MoviesHolder, position: Int) {
         val item = list.currentList[position]
-        val binding = ItemMovieBinding.bind(holder.itemView)
-        binding.apply {
-            tvReutingKp.text = item.rating?.kp.toString()
-            tvReutingImdb.text = item.rating?.imdb.toString()
-            item.poster?.previewUrl?.let { imgPoster.loadImage(it) }
+        item.poster?.previewUrl?.let{
+            val binding = ItemMovieBinding.bind(holder.itemView)
+            binding.apply {
+                tvReutingKp.text = item.rating?.kp.toString()
+                tvReutingImdb.text = item.rating?.imdb.toString()
+                item.poster.previewUrl.let { imgPoster.loadImage(it) }
 
-            imgPoster.setOnClickListener{
-                Toast.makeText(root.context, item.id.toString(), Toast.LENGTH_SHORT).show()
+                imgPoster.setOnClickListener {
+                    Toast.makeText(root.context, item.id.toString(), Toast.LENGTH_SHORT).show()
+                }
+                imgFavorite.setOnClickListener {
+                    Toast.makeText(root.context, item.name.toString(), Toast.LENGTH_SHORT).show()
+                }
             }
-            imgFavorite.setOnClickListener{
-                Toast.makeText(root.context, item.name.toString(), Toast.LENGTH_SHORT).show()
-            }
+        } ?: {
+            holder.itemView.visibility = View.GONE
         }
     }
 }
