@@ -9,12 +9,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imdb.R
 import com.example.imdb.data.local.model.HomeMovieModel
-import com.example.imdb.data.network.model.kinopoisk.DocsItem
 import com.example.imdb.databinding.ItemMovieBinding
 import com.example.imdb.domain.util.loadImage
 
 class AdapterMovies(
-    val addFavorite: (HomeMovieModel) -> Unit
+    val clickFavorite: (HomeMovieModel) -> Unit
 ) : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     private lateinit var binding: ItemMovieBinding
@@ -54,7 +53,7 @@ class AdapterMovies(
                 }
 
                 imgFavorite.setOnClickListener {
-                    addFavorite(item)
+                    clickFavorite(item)
                 }
             }
         } ?: {

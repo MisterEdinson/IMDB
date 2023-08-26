@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.example.imdb.R
+import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.databinding.FragmentFavoriteBinding
 import com.example.imdb.ui.home.AdapterMovies
 import com.example.imdb.ui.home.MainViewModel
@@ -35,7 +36,10 @@ class FavoriteFragment : Fragment() {
             spSort.visibility = View.GONE
             initAdapter()
             viewModel.getAllFavorite()
-            viewModel.movieFavorite.observe(viewLifecycleOwner){
+            viewModel.movieAllFavoriteLiveData.observe(viewLifecycleOwner){
+                if(it.isEmpty()){
+                    findNavController().navigate(R.id.action_favoriteFragment_to_homeFragment)
+                }
                 adapter?.list?.submitList(it)
             }
 
@@ -46,14 +50,13 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        adapter = AdapterMovies {addFavorite()}
+        adapter = AdapterMovies {favorite -> clickFavorite(favorite)}
         binding.mainContainer.rvMovies.adapter = adapter
     }
 
-    private fun addFavorite(){
-
+    private fun clickFavorite(favorite: HomeMovieModel){
+        viewModel.deleteFavorite(favorite)
+        viewModel.getAllFavorite()
+        Toast.makeText(context, "Удалено: ${favorite.title}", Toast.LENGTH_SHORT).show()
     }
-
-
-
 }

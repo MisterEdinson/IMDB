@@ -30,11 +30,19 @@ class Repository @Inject constructor(
         return MappingKinopoiskToFavorite().converter(retro.getItemMovies(id))
     }
 
+    suspend fun getAllFavorite(): List<HomeMovieModel>{
+        return homeMovies.getAllFavorite()
+    }
+
     suspend fun addFavorite(insert:HomeMovieModel){
         homeMovies.insertHomeMovie(insert)
     }
 
-    suspend fun getAllFavorite(): List<HomeMovieModel>{
-        return homeMovies.getAllFavorite()
+    suspend fun delFavorite(delete: HomeMovieModel){
+        homeMovies.delFavorite(delete)
+    }
+
+    suspend fun searchFavId(id:String): HomeMovieModel{
+        return homeMovies.searchFavoriteId(id)
     }
 }

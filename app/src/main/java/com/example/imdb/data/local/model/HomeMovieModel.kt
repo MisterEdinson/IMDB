@@ -2,9 +2,10 @@ package com.example.imdb.data.local.model
 
 import androidx.room.DeleteTable
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "home_movie")
+@Entity(tableName = "home_movie" , indices = [Index(value = ["idkp"], unique = true)])
 data class HomeMovieModel(
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0,

@@ -36,11 +36,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        viewModel.moviesLiveData.observe(viewLifecycleOwner){
+        viewModel.moviesDefaultLiveData.observe(viewLifecycleOwner){
             adapter?.list?.submitList(it)
         }
-        binding.apply {
-            mainContainer.etSearch.addTextChangedListener( object : SearchTextWatcher{
+        binding.mainContainer.apply {
+            etSearch.addTextChangedListener( object : SearchTextWatcher{
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     p0?.let {
                         if (p0.length > 2){
@@ -51,21 +51,32 @@ class HomeFragment : Fragment() {
                 }
             })
 
-            mainContainer.spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     viewModel.sort = SortConvert().converted(resources.getStringArray(R.array.sort_array)[p2])
                     searchMovie()
                 }
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
             }
-
-            mainContainer.tvBtnFavorite.setOnClickListener {
+            visibleBtnFavorite()
+            tvBtnFavorite.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
             }
         }
     }
+
+    private fun visibleBtnFavorite() {
+        viewModel.movieAllFavoriteLiveData.observe(viewLifecycleOwner){
+            if(it.isNotEmpty()){
+                binding.mainContainer.tvBtnFavorite.visibility = View.VISIBLE
+            }else{
+                binding.mainContainer.tvBtnFavorite.visibility = View.INVISIBLE
+            }
+        }
+    }
+
     private fun initAdapter(){
-        adapter = AdapterMovies({ favorite -> addFavorite(favorite)})
+        adapter = AdapterMovies({ favorite -> clickFavorite(favorite)})
         binding.mainContainer.rvMovies.adapter = adapter
 
         adapterSort = AdapterSort(context, resources.getStringArray(R.array.sort_array))
@@ -83,8 +94,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun addFavorite(favorite: HomeMovieModel){
-        viewModel.insert(favorite)
+    private fun clickFavorite(favorite: HomeMovieModel){
+        viewModel.addFavorite(favorite)
+        viewModel.getAllFavorite()
+        Toast.makeText(context, "Добавлено: ${favorite.title}", Toast.LENGTH_SHORT).show()
     }
 
     private fun navigationDesc(){
