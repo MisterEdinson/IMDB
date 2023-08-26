@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         viewModel.moviesLiveData.observe(viewLifecycleOwner){
-            adapter?.list?.submitList(it.docs)
+            adapter?.list?.submitList(it)
         }
         binding.apply {
             mainContainer.etSearch.addTextChangedListener( object : SearchTextWatcher{

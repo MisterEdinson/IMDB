@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imdb.R
+import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.data.network.model.kinopoisk.DocsItem
 import com.example.imdb.databinding.ItemMovieBinding
 import com.example.imdb.domain.util.loadImage
@@ -18,14 +19,15 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     class MoviesHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    val callback = object : DiffUtil.ItemCallback<DocsItem>() {
-        override fun areItemsTheSame(oldItem: DocsItem, newItem: DocsItem): Boolean {
-            return oldItem.id == newItem.id
+    val callback = object : DiffUtil.ItemCallback<HomeMovieModel>() {
+        override fun areItemsTheSame(oldItem: HomeMovieModel, newItem: HomeMovieModel): Boolean {
+            return oldItem.title == newItem.title
         }
 
-        override fun areContentsTheSame(oldItem: DocsItem, newItem: DocsItem): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: HomeMovieModel, newItem: HomeMovieModel): Boolean {
+            return oldItem.title == newItem.title
         }
+
 
     }
     val list = AsyncListDiffer(this, callback)
@@ -40,18 +42,19 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     override fun onBindViewHolder(holder: MoviesHolder, position: Int) {
         val item = list.currentList[position]
-        item.poster?.previewUrl?.let{
+        item.poster?.let{
             val binding = ItemMovieBinding.bind(holder.itemView)
             binding.apply {
-                tvReutingKp.text = item.rating?.kp.toString()
-                tvReutingImdb.text = item.rating?.imdb.toString()
-                item.poster.previewUrl.let { imgPoster.loadImage(it) }
+                tvReutingKp.text = item.raitingKp
+                tvReutingImdb.text = item.raitingImdb
+                item.poster?.let { imgPoster.loadImage(it) }
 
                 imgPoster.setOnClickListener {
-                    Toast.makeText(root.context, item.id.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(root.context, item.idkp.toString(), Toast.LENGTH_SHORT).show()
                 }
+
                 imgFavorite.setOnClickListener {
-                    Toast.makeText(root.context, item.name.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(root.context, item.title.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         } ?: {

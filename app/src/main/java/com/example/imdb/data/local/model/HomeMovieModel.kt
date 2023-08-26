@@ -8,6 +8,9 @@ import androidx.room.PrimaryKey
 data class HomeMovieModel(
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0,
+    var idkp: String? = null,
+    var idtmdb: String? = null,
+    var idimdb: String? = null,
     var type: String? = null,
     var title: String? = null,
     var desc: String? = null,
