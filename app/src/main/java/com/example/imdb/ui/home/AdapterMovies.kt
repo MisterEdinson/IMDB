@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.imdb.R
 import com.example.imdb.data.network.model.kinopoisk.DocsItem
 import com.example.imdb.databinding.ItemMovieBinding
+import com.example.imdb.domain.util.loadImage
 
 class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
@@ -40,6 +41,7 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
         holder.itemView.apply {
             binding.tvTitle.text = item.name
             binding.tvReuting.text = item.rating?.kp.toString()
+            item.poster?.previewUrl?.let { binding.imgPoster.loadImage(it) }
         }
     }
 }
