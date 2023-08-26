@@ -21,4 +21,11 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
             moviesLiveData.value = response
         }
     }
+
+    fun searchMovie(search:String){
+        viewModelScope.launch {
+            val response = repo.searchMovie(search)
+            moviesLiveData.value = response
+        }
+    }
 }

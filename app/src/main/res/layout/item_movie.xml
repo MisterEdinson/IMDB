@@ -20,11 +20,12 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="@drawable/bg_linear_kp"
         app:layout_constraintBottom_toBottomOf="@+id/imgPoster"
         app:layout_constraintEnd_toEndOf="@+id/imgPoster"
-        app:layout_constraintStart_toStartOf="@+id/imgPoster">
+        app:layout_constraintStart_toStartOf="@+id/imgPoster"
+        app:layout_constraintTop_toBottomOf="@+id/imgPoster">
 
         <TextView
             android:id="@+id/tvReuting"
@@ -33,9 +34,9 @@
             android:layout_weight="1"
             android:gravity="left|center"
             android:paddingStart="8dp"
+            android:text="Рейтинг: 7.7"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="Рейтинг: 7.7" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imgFavorite"
