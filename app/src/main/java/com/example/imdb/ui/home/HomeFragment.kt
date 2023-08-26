@@ -16,6 +16,7 @@ class HomeFragment : Fragment() {
     val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
     private var adapter: AdapterMovies? = null
+    private var adapterSort: AdapterSort? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,5 +35,8 @@ class HomeFragment : Fragment() {
     private fun initAdapter(){
         adapter = AdapterMovies()
         binding.rvMovies.adapter = adapter
+
+        adapterSort = AdapterSort(context, resources.getStringArray(R.array.sort_array))
+        binding.spSort.adapter = adapterSort
     }
 }

@@ -38,10 +38,10 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     override fun onBindViewHolder(holder: MoviesHolder, position: Int) {
         val item = list.currentList[position]
-        holder.itemView.apply {
-            binding.tvTitle.text = item.name
-            binding.tvReuting.text = item.rating?.kp.toString()
-            item.poster?.previewUrl?.let { binding.imgPoster.loadImage(it) }
+        val binding = ItemMovieBinding.bind(holder.itemView)
+        binding.apply {
+            tvReuting.text = "Рейтинг: ${item.rating?.kp}"
+            item.poster?.previewUrl?.let { imgPoster.loadImage(it) }
         }
     }
 }

@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">IMDB</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="reuting">Рейтинг: $d</string>
+
+    <string-array name="sort_array">
+        <item>по рейтингу</item>
+        <item>по алфавиту</item>
+        <item>рейтинг IMDB</item>
+        <item>кол.оценок IMDB</item>
+    </string-array>
+
+    <style name="NoUnderlineEditText">
+        <item name="android:background">@null</item>
+    </style>
 </resources>

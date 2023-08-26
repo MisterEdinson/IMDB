@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingEnd="1dp"
+    android:paddingBottom="1dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -16,35 +18,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/avatar" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_linear_kp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPoster"
         app:layout_constraintEnd_toEndOf="@+id/imgPoster"
-        app:layout_constraintTop_toTopOf="@+id/imgPoster"
-        app:srcCompat="@drawable/ic_fav_no_click" />
+        app:layout_constraintStart_toStartOf="@+id/imgPoster">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Title Movie"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPoster" />
+        <TextView
+            android:id="@+id/tvReuting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingStart="8dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Рейтинг: 7.7" />
 
-    <TextView
-        android:id="@+id/tvReuting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Rauting: 7.7"
-        app:layout_constraintEnd_toEndOf="@+id/imgPoster"
-        app:layout_constraintTop_toBottomOf="@+id/imgPoster" />
+        <ImageView
+            android:id="@+id/imgFavorite"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/imgPoster"
+            app:layout_constraintTop_toTopOf="@+id/imgPoster"
+            app:srcCompat="@drawable/ic_fav_no_click" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
