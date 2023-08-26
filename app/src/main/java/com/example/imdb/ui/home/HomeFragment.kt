@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.imdb.R
 import com.example.imdb.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,32 +38,37 @@ class HomeFragment : Fragment() {
         viewModel.moviesLiveData.observe(viewLifecycleOwner){
             adapter?.list?.submitList(it.docs)
         }
-
-        binding.etSearch.addTextChangedListener( object : SearchTextWatcher{
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                p0?.let {
-                    if (p0.length > 2){
-                        viewModel.search = p0.toString()
-                        searchMovie()
+        binding.apply {
+            mainContainer.etSearch.addTextChangedListener( object : SearchTextWatcher{
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    p0?.let {
+                        if (p0.length > 2){
+                            viewModel.search = p0.toString()
+                            searchMovie()
+                        }
                     }
                 }
-            }
-        })
+            })
 
-        binding.spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                viewModel.sort = SortConvert().converted(resources.getStringArray(R.array.sort_array)[p2])
-                searchMovie()
+            mainContainer.spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    viewModel.sort = SortConvert().converted(resources.getStringArray(R.array.sort_array)[p2])
+                    searchMovie()
+                }
+                override fun onNothingSelected(p0: AdapterView<*>?) {}
             }
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+            mainContainer.tvBtnFavorite.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+            }
         }
     }
     private fun initAdapter(){
         adapter = AdapterMovies()
-        binding.rvMovies.adapter = adapter
+        binding.mainContainer.rvMovies.adapter = adapter
 
         adapterSort = AdapterSort(context, resources.getStringArray(R.array.sort_array))
-        binding.spSort.adapter = adapterSort
+        binding.mainContainer.spSort.adapter = adapterSort
     }
 
     private fun searchMovie(){
@@ -74,5 +80,9 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun navigationDesc(){
+        findNavController().navigate(R.id.action_homeFragment_to_descriptFragment)
     }
 }

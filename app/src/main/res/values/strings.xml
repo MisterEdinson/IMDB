@@ -6,6 +6,7 @@
     <string name="favorite">Избранное</string>
     <string name="search">Введите название</string>
     <string name="todo">TODO</string>
+    <string name="back">Назад</string>
 
     <string-array name="sort_array">
         <item>по рейтингу</item>
