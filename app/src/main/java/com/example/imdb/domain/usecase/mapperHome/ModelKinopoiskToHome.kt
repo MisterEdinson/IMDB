@@ -1,4 +1,4 @@
-package com.example.imdb.domain.usecase
+package com.example.imdb.domain.usecase.mapperHome
 
 import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.data.network.model.kinopoisk.DocsItem

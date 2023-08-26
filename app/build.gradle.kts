@@ -77,12 +77,14 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     // Hilt
     val hiltVersion = "2.44.2"
-    implementation ("com.google.dagger:hilt-android:2.44.2")
-    kapt ("com.google.dagger:hilt-compiler:2.44.2")
+    implementation("com.google.dagger:hilt-android:2.44.2")
+    kapt("com.google.dagger:hilt-compiler:2.44.2")
     //DI Dagger 2
-    implementation ("com.google.dagger:dagger:2.44.2")
-    kapt ("com.google.dagger:dagger-compiler:2.44.2")
+    implementation("com.google.dagger:dagger:2.44.2")
+    kapt("com.google.dagger:dagger-compiler:2.44.2")
     //Coil
     implementation("io.coil-kt:coil:1.2.0")
     implementation("io.coil-kt:coil-svg:1.2.0")
+    //Gson
+    implementation("com.google.code.gson:gson:2.10.1")
 }
