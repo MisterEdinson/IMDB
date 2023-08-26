@@ -12,6 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val moviesLiveData: MutableLiveData<Kinopoisk> = MutableLiveData()
+    var sort: String? = null
+    var search: String? = null
     init {
         getMovies()
     }
@@ -22,9 +24,9 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         }
     }
 
-    fun searchMovie(search:String){
+    fun searchMovie(search:String, sort:String?){
         viewModelScope.launch {
-            val response = repo.searchMovie(search)
+            val response = repo.searchMovie(search, sort)
             moviesLiveData.value = response
         }
     }

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.imdb.R
@@ -40,11 +42,20 @@ class HomeFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0?.let {
                     if (p0.length > 2){
-                        searchMovie(p0.toString())
+                        viewModel.search = p0.toString()
+                        searchMovie()
                     }
                 }
             }
         })
+
+        binding.spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                viewModel.sort = SortConvert().converted(resources.getStringArray(R.array.sort_array)[p2])
+                searchMovie()
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
     }
     private fun initAdapter(){
         adapter = AdapterMovies()
@@ -54,10 +65,14 @@ class HomeFragment : Fragment() {
         binding.spSort.adapter = adapterSort
     }
 
-    private fun searchMovie(search:String){
+    private fun searchMovie(){
         job?.cancel()
         job = MainScope().launch {
-            viewModel.searchMovie(search)
+            viewModel.search?.let {
+                if(it.length > 2){
+                    viewModel.searchMovie(it, viewModel.sort)
+                }
+            }
         }
     }
 }

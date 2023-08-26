@@ -9,8 +9,8 @@ class Repository @Inject constructor(private val retro: SimpleRetro) {
         return retro.getMovies()
     }
 
-    suspend fun searchMovie(search: String): Kinopoisk {
+    suspend fun searchMovie(search: String, sort: String?): Kinopoisk {
         //?limit=20&search={search}&field=name&sortField=rating.imdb
-        return retro.getMoviesSearch(5,search,"name", "rating.kp")
+        return retro.getMoviesSearch(6, search, "name", sort ?: "rating.kp")
     }
 }

@@ -3,6 +3,7 @@ package com.example.imdb.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -40,8 +41,16 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
         val item = list.currentList[position]
         val binding = ItemMovieBinding.bind(holder.itemView)
         binding.apply {
-            tvReuting.text = "Рейтинг: ${item.rating?.kp}"
+            tvReutingKp.text = item.rating?.kp.toString()
+            tvReutingImdb.text = item.rating?.imdb.toString()
             item.poster?.previewUrl?.let { imgPoster.loadImage(it) }
+
+            imgPoster.setOnClickListener{
+                Toast.makeText(root.context, item.id.toString(), Toast.LENGTH_SHORT).show()
+            }
+            imgFavorite.setOnClickListener{
+                Toast.makeText(root.context, item.name.toString(), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
