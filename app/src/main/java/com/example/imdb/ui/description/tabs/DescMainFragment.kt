@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.imdb.R
 import com.example.imdb.data.network.model.kinopoiskMovie.PersonsItem
 import com.example.imdb.databinding.FragmentDescMainBinding
+import com.example.imdb.domain.util.ConverterMinutesToHour
 import com.example.imdb.ui.description.adapters.AdapterDescriptActror
 import com.example.imdb.ui.home.MainViewModel
 import com.google.gson.Gson
@@ -48,7 +49,7 @@ class DescMainFragment : Fragment() {
 
                 tvDescDataRelize.text = it.premierWorld
 
-                tvDescLanght.text = it.lenght
+                tvDescLanght.text = ConverterMinutesToHour().converte(it.lenght)
                 tvDescBudget.text = it.budget
 
                 tvDescFeesRus.text = it.feesRus
