@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DescTrailerFragment : Fragment() {
 
     private lateinit var binding: FragmentDescTrailerBinding
-    val viewNavModel: DescriptionViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,9 +26,7 @@ class DescTrailerFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewNavModel.navLiveData.observe(viewLifecycleOwner){
 
-        }
     }
 
 }

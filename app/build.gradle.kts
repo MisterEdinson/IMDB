@@ -91,5 +91,6 @@ dependencies {
     val glideVersion = "4.13.0"
     implementation ("com.github.bumptech.glide:glide:$glideVersion")
     kapt ("com.github.bumptech.glide:compiler:$glideVersion")
-
+    //JSOP
+    implementation ("org.jsoup:jsoup:1.14.3")
 }
