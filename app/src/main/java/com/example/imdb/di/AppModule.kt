@@ -18,15 +18,19 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     fun baseUrl() = BASE_URL
+
     @Provides
     fun logging() = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
     @Provides
-    fun okHttpClient() = OkHttpClient.Builder().addInterceptor{
+    fun okHttpClient() = OkHttpClient.Builder().addInterceptor {
         val request = it.request().newBuilder().addHeader("X-API-KEY", TOKEN).build()
         it.proceed(request)
     }.addInterceptor(logging()).build()
+
     @Provides
     fun gson(): GsonConverterFactory = GsonConverterFactory.create()
+
     @Provides
     @Singleton
     fun provideRetrofit(): SimpleRetro =
