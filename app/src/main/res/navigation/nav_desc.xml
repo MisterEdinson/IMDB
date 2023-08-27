@@ -10,23 +10,59 @@
         android:name="com.example.imdb.ui.description.tabs.DescMainFragment"
         android:label="fragment_desc_main"
         tools:layout="@layout/fragment_desc_main" >
-        <argument
-            android:name="model"
-            app:argType="com.example.imdb.data.local.model.FavoriteMovieModel" />
+        <action
+            android:id="@+id/action_descMainFragment_to_descFactFragment"
+            app:destination="@id/descFactFragment" />
+        <action
+            android:id="@+id/action_descMainFragment_to_descSimilarFragment"
+            app:destination="@id/descSimilarFragment" />
+        <action
+            android:id="@+id/action_descMainFragment_to_descTrailerFragment"
+            app:destination="@id/descTrailerFragment" />
     </fragment>
     <fragment
         android:id="@+id/descFactFragment"
         android:name="com.example.imdb.ui.description.tabs.DescFactFragment"
         android:label="fragment_desc_fact"
-        tools:layout="@layout/fragment_desc_fact" />
+        tools:layout="@layout/fragment_desc_fact" >
+        <action
+            android:id="@+id/action_descFactFragment_to_descTrailerFragment"
+            app:destination="@id/descTrailerFragment" />
+        <action
+            android:id="@+id/action_descFactFragment_to_descSimilarFragment"
+            app:destination="@id/descSimilarFragment" />
+        <action
+            android:id="@+id/action_descFactFragment_to_descMainFragment"
+            app:destination="@id/descMainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/descSimilarFragment"
         android:name="com.example.imdb.ui.description.tabs.DescSimilarFragment"
         android:label="fragment_desc_similar"
-        tools:layout="@layout/fragment_desc_similar" />
+        tools:layout="@layout/fragment_desc_similar" >
+        <action
+            android:id="@+id/action_descSimilarFragment_to_descMainFragment"
+            app:destination="@id/descMainFragment" />
+        <action
+            android:id="@+id/action_descSimilarFragment_to_descFactFragment"
+            app:destination="@id/descFactFragment" />
+        <action
+            android:id="@+id/action_descSimilarFragment_to_descTrailerFragment"
+            app:destination="@id/descTrailerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/descTrailerFragment"
         android:name="com.example.imdb.ui.description.tabs.DescTrailerFragment"
         android:label="fragment_desc_trailer"
-        tools:layout="@layout/fragment_desc_trailer" />
+        tools:layout="@layout/fragment_desc_trailer" >
+        <action
+            android:id="@+id/action_descTrailerFragment_to_descSimilarFragment"
+            app:destination="@id/descSimilarFragment" />
+        <action
+            android:id="@+id/action_descTrailerFragment_to_descMainFragment"
+            app:destination="@id/descMainFragment" />
+        <action
+            android:id="@+id/action_descTrailerFragment_to_descFactFragment"
+            app:destination="@id/descFactFragment" />
+    </fragment>
 </navigation>

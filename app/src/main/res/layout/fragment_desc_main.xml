@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".ui.description.tabs.DescMainFragment">
 
     <TextView
@@ -12,16 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        tools:text="1+1"
         android:gravity="start"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescTypeLabel" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1+1" />
 
     <TextView
         android:id="@+id/tvDescText"
@@ -31,10 +31,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:textColor="@color/black"
-        tools:text="Пострадав в результате несчастного случая, богатый аристократ Филипп нанимает в помощники человека, который менее всего подходит для этой работы, – молодого жителя предместья Дрисса, только что освободившегося из тюрьмы. Несмотря на то, что Филипп прикован к инвалидному креслу, Дриссу удается привнести в размеренную жизнь аристократа дух приключений."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDescCountryLabel"
+        tools:text="Пострадав в результате несчастного случая, богатый аристократ Филипп нанимает в помощники человека, который менее всего подходит для этой работы, – молодого жителя предместья Дрисса, только что освободившегося из тюрьмы. Несмотря на то, что Филипп прикован к инвалидному креслу, Дриссу удается привнести в размеренную жизнь аристократа дух приключений." />
 
     <TextView
         android:id="@+id/tvDescRaitingLabel"
@@ -118,18 +118,6 @@
         app:layout_constraintTop_toTopOf="@+id/tvDescDataRelizeLabel" />
 
     <TextView
-        android:id="@+id/tvDescType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDescTypeLabel"
-        app:layout_constraintStart_toEndOf="@+id/tvDescTypeLabel"
-        app:layout_constraintTop_toTopOf="@+id/tvDescTypeLabel"
-        tools:text="Фильм" />
-
-    <TextView
         android:id="@+id/tvDescCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,28 +126,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvDescCountryLabel"
         app:layout_constraintStart_toEndOf="@+id/tvDescCountryLabel"
-        app:layout_constraintTop_toTopOf="@+id/tvDescType"
-        app:layout_constraintVertical_bias="0.0"
         tools:text="Франция" />
-
-    <TextView
-        android:id="@+id/tvDescTypeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Тип:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvDescCountryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Страна:"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDescType"
-        app:layout_constraintStart_toEndOf="@+id/tvDescType"
-        app:layout_constraintTop_toTopOf="@+id/tvDescType" />
+        app:layout_constraintStart_toStartOf="@+id/tvDescTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescTitle" />
 
     <TextView
         android:id="@+id/tvDescYearLabel"
@@ -298,14 +274,16 @@
         app:layout_constraintTop_toTopOf="@+id/textView24" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvActor"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
-        tools:listitem="@layout/item_actor"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintTop_toBottomOf="@+id/textView21"
+        tools:listitem="@layout/item_actor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,7 @@
         <ImageView
             android:id="@+id/imgCenterBg"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:scaleType="centerCrop"
             android:src="@drawable/bkg"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         <ImageView
             android:id="@+id/imgCenterPoster"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:src="@drawable/avatar"
             app:layout_constraintBottom_toBottomOf="@+id/imgCenterBg"
             app:layout_constraintEnd_toEndOf="parent"
