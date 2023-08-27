@@ -4,6 +4,6 @@ data class Rating(
 	val imdb: Any? = null,
 	val kp: Any? = null,
 	val await: Any? = null,
-	val russianFilmCritics: Double? = null,
+	val russianFilmCritics: Any? = null,
 	val filmCritics: Any? = null
 )
