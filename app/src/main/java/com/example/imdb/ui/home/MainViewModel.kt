@@ -13,7 +13,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val moviesDefaultLiveData: MutableLiveData<List<HomeMovieModel>> = MutableLiveData()
-    val movieItemFavoriteLiveData: MutableLiveData<FavoriteMovieModel> = MutableLiveData()
     val movieAllFavoriteLiveData: MutableLiveData<List<HomeMovieModel>> = MutableLiveData()
     var sort: String? = null
     var search: String? = null
@@ -22,7 +21,7 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         getMovies()
         getAllFavorite()
     }
-
+    //По умолчанию - первый запуск
     fun getMovies() {
         viewModelScope.launch {
             val response = repo.getMovies()
@@ -30,13 +29,14 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         }
     }
 
+    //поиск на сервере
     fun searchMovie(search: String, sort: String?) {
         viewModelScope.launch {
             val response = repo.searchMovie(search, sort)
             moviesDefaultLiveData.value = response
         }
     }
-
+    // вернуть все избранные
     fun getAllFavorite() {
         viewModelScope.launch {
             val response = repo.getAllFavorite()
@@ -44,27 +44,21 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         }
     }
 
-    fun getMovie(id: String) {
+    fun getAllLocal(){
         viewModelScope.launch {
-            val response = repo.getMovie(id)
-            movieItemFavoriteLiveData.value = response
+            val res = repo.getLocal()
+            moviesDefaultLiveData.value = res
         }
     }
 
-    fun clickFavorite(favorite: HomeMovieModel) {
-        viewModelScope.launch {
-            if(repo.searchFavId(favorite.idkp.toString()).title != null){
-                deleteFavorite(favorite)
-            }else{
-                repo.addFavorite(favorite)
-            }
-        }
-    }
+    // добавить избранное
     fun addFavorite(favorite: HomeMovieModel){
        viewModelScope.launch {
            repo.addFavorite(favorite)
        }
     }
+
+    // Удалить избранное
     fun deleteFavorite(favorite: HomeMovieModel){
         viewModelScope.launch {
             repo.delFavorite(favorite)

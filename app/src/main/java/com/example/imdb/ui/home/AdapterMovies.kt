@@ -7,13 +7,16 @@ import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.imdb.R
 import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.databinding.ItemMovieBinding
 import com.example.imdb.domain.util.loadImage
 
 class AdapterMovies(
-    val clickFavorite: (HomeMovieModel) -> Unit
+    val addFavorite: (HomeMovieModel) -> Unit,
+    val delFavorite: (HomeMovieModel) -> Unit,
+    val navigate: (HomeMovieModel) -> Unit,
 ) : RecyclerView.Adapter<AdapterMovies.MoviesHolder>() {
 
     private lateinit var binding: ItemMovieBinding
@@ -22,11 +25,11 @@ class AdapterMovies(
 
     val callback = object : DiffUtil.ItemCallback<HomeMovieModel>() {
         override fun areItemsTheSame(oldItem: HomeMovieModel, newItem: HomeMovieModel): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.idkp == newItem.idkp
         }
 
         override fun areContentsTheSame(oldItem: HomeMovieModel, newItem: HomeMovieModel): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.favorite == newItem.favorite
         }
     }
     val list = AsyncListDiffer(this, callback)
@@ -46,14 +49,22 @@ class AdapterMovies(
             binding.apply {
                 tvReutingKp.text = item.raitingKp
                 tvReutingImdb.text = item.raitingImdb
-                item.poster?.let { imgPoster.loadImage(it) }
+                item.poster?.let { imgPoster.load(item.poster) }
+
+                when(item.favorite){
+                    0 -> binding.imgFavorite.load(R.drawable.ic_fav_no_click)
+                    1 -> binding.imgFavorite.load(R.drawable.ic_fav_click)
+                }
 
                 imgPoster.setOnClickListener {
-                    Toast.makeText(root.context, item.idkp.toString(), Toast.LENGTH_SHORT).show()
+                    navigate(item)
                 }
 
                 imgFavorite.setOnClickListener {
-                    clickFavorite(item)
+                    when(item.favorite){
+                        0 -> addFavorite(item)
+                        1 -> delFavorite(item)
+                    }
                 }
             }
         } ?: {

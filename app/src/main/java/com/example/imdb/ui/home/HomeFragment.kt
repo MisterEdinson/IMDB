@@ -36,14 +36,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        viewModel.moviesDefaultLiveData.observe(viewLifecycleOwner){
+        viewModel.moviesDefaultLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
         }
         binding.mainContainer.apply {
-            etSearch.addTextChangedListener( object : SearchTextWatcher{
+            etSearch.addTextChangedListener(object : SearchTextWatcher {
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     p0?.let {
-                        if (p0.length > 2){
+                        if (p0.length > 2) {
                             viewModel.search = p0.toString()
                             searchMovie()
                         }
@@ -51,14 +51,18 @@ class HomeFragment : Fragment() {
                 }
             })
 
-            spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    viewModel.sort = SortConvert().converted(resources.getStringArray(R.array.sort_array)[p2])
+                    viewModel.sort =
+                        SortConvert().converted(resources.getStringArray(R.array.sort_array)[p2])
                     searchMovie()
                 }
+
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
             }
+
             visibleBtnFavorite()
+
             tvBtnFavorite.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
             }
@@ -66,41 +70,52 @@ class HomeFragment : Fragment() {
     }
 
     private fun visibleBtnFavorite() {
-        viewModel.movieAllFavoriteLiveData.observe(viewLifecycleOwner){
-            if(it.isNotEmpty()){
+        viewModel.movieAllFavoriteLiveData.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
                 binding.mainContainer.tvBtnFavorite.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.mainContainer.tvBtnFavorite.visibility = View.INVISIBLE
             }
         }
     }
 
-    private fun initAdapter(){
-        adapter = AdapterMovies({ favorite -> clickFavorite(favorite)})
+    private fun initAdapter() {
+        adapter = AdapterMovies(
+            { add -> addFavorite(add) },
+            { del -> delFavorite(del) },
+            { nav -> navigationDesc(nav) }
+        )
         binding.mainContainer.rvMovies.adapter = adapter
 
         adapterSort = AdapterSort(context, resources.getStringArray(R.array.sort_array))
         binding.mainContainer.spSort.adapter = adapterSort
     }
 
-    private fun searchMovie(){
+    private fun searchMovie() {
         job?.cancel()
         job = MainScope().launch {
             viewModel.search?.let {
-                if(it.length > 2){
+                if (it.length > 2) {
                     viewModel.searchMovie(it, viewModel.sort)
                 }
             }
         }
     }
 
-    private fun clickFavorite(favorite: HomeMovieModel){
-        viewModel.addFavorite(favorite)
-        viewModel.getAllFavorite()
-        Toast.makeText(context, "Добавлено: ${favorite.title}", Toast.LENGTH_SHORT).show()
+    private fun addFavorite(add: HomeMovieModel) {
+        viewModel.addFavorite(add)
+        viewModel.getAllLocal()
+        binding.mainContainer.tvBtnFavorite.visibility = View.VISIBLE
+        Toast.makeText(context, "Добавлено: ${add.title}", Toast.LENGTH_SHORT).show()
     }
 
-    private fun navigationDesc(){
+    private fun delFavorite(del: HomeMovieModel) {
+        viewModel.deleteFavorite(del)
+        viewModel.getAllLocal()
+        Toast.makeText(context, "Удалено: ${del.title}", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigationDesc(nav: HomeMovieModel) {
         findNavController().navigate(R.id.action_homeFragment_to_descriptFragment)
     }
 }

@@ -21,7 +21,8 @@ class ModelKinopoiskToHome {
             raitingKp = itemMovie?.rating?.kp.toString(),
             raitingImdb = itemMovie?.rating?.imdb.toString(),
             votesKp = itemMovie?.votes?.kp.toString(),
-            votesImdb = itemMovie?.votes?.imdb.toString()
+            votesImdb = itemMovie?.votes?.imdb.toString(),
+            favorite = 0
         )
     }
 }

@@ -4,6 +4,8 @@ import com.example.imdb.data.local.dao.HomeMovieDao
 import com.example.imdb.data.local.model.FavoriteMovieModel
 import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.data.network.SimpleRetro
+import com.example.imdb.domain.usecase.addFavorite.FavoriteAdd
+import com.example.imdb.domain.usecase.deleteFavorite.FavoriteDelete
 import com.example.imdb.domain.usecase.mapperFavorite.MappingKinopoiskToFavorite
 import com.example.imdb.domain.usecase.mapperHome.MappingKinopoiskToHome
 import javax.inject.Inject
@@ -13,10 +15,19 @@ class Repository @Inject constructor(
     private val homeMovies: HomeMovieDao
 ) {
     suspend fun getMovies(): List<HomeMovieModel> {
-        return MappingKinopoiskToHome().converter(retro.getMovies())
+        val default = MappingKinopoiskToHome().converter(retro.getMovies())
+        homeMovies.deleteOld()
+        homeMovies.insertHomeMovie(default)
+        return homeMovies.getAll()
     }
+
+    suspend fun getLocal(): List<HomeMovieModel>{
+        return homeMovies.getAll()
+    }
+
     suspend fun searchMovie(search: String, sort: String?): List<HomeMovieModel> {
-        return MappingKinopoiskToHome()
+        homeMovies.deleteOld()
+        val res = MappingKinopoiskToHome()
             .converter(
                 retro.getMoviesSearch(
                     6,
@@ -25,24 +36,19 @@ class Repository @Inject constructor(
                     sort ?: "rating.kp"
                 )
             )
-    }
-    suspend fun getMovie(id:String): FavoriteMovieModel{
-        return MappingKinopoiskToFavorite().converter(retro.getItemMovies(id))
-    }
-
-    suspend fun getAllFavorite(): List<HomeMovieModel>{
-        return homeMovies.getAllFavorite()
+        homeMovies.insertHomeMovie(res)
+        return homeMovies.getAll()
     }
 
-    suspend fun addFavorite(insert:HomeMovieModel){
-        homeMovies.insertHomeMovie(insert)
+    suspend fun getAllFavorite(): List<HomeMovieModel> {
+        return homeMovies.getAllFavorite(1)
     }
 
-    suspend fun delFavorite(delete: HomeMovieModel){
-        homeMovies.delFavorite(delete)
+    suspend fun addFavorite(insert: HomeMovieModel) {
+        homeMovies.updateMovie(FavoriteAdd().add(insert))
     }
 
-    suspend fun searchFavId(id:String): HomeMovieModel{
-        return homeMovies.searchFavoriteId(id)
+    suspend fun delFavorite(delete: HomeMovieModel) {
+        homeMovies.updateMovie(FavoriteDelete().deleteFavorite(delete))
     }
 }

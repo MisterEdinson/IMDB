@@ -87,4 +87,9 @@ dependencies {
     implementation("io.coil-kt:coil-svg:1.2.0")
     //Gson
     implementation("com.google.code.gson:gson:2.10.1")
+    //Glide
+    val glideVersion = "4.13.0"
+    implementation ("com.github.bumptech.glide:glide:$glideVersion")
+    kapt ("com.github.bumptech.glide:compiler:$glideVersion")
+
 }

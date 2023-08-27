@@ -90,6 +90,7 @@
         android:paddingBottom="4dp"
         android:layout_marginTop="4dp"
         android:text="@string/favorite"
+        android:visibility="visible"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -113,5 +114,21 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgBtnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="32dp"
+        android:paddingEnd="28dp"
+        android:paddingTop="3dp"
+        android:layout_marginTop="4dp"
+        android:paddingBottom="3dp"
+        android:visibility="gone"
+        android:background="@drawable/bg_linear_favorite"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

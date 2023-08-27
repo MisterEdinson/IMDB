@@ -24,4 +24,5 @@ data class HomeMovieModel(
     var raitingImdb: String? = null,
     var votesKp: String? = null,
     var votesImdb: String? = null,
+    var favorite: Int? = null
 )
