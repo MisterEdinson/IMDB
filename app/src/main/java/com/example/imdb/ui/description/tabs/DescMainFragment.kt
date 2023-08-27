@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.imdb.R
 import com.example.imdb.data.network.model.kinopoiskMovie.PersonsItem
 import com.example.imdb.databinding.FragmentDescMainBinding
+import com.example.imdb.domain.util.ConverterDate
 import com.example.imdb.domain.util.ConverterMinutesToHour
 import com.example.imdb.ui.description.adapters.AdapterDescriptActror
 import com.example.imdb.ui.home.MainViewModel
@@ -47,13 +48,13 @@ class DescMainFragment : Fragment() {
                 tvDescKpRaiting.text = it.ratingKp
                 tvDescImdbRaiting.text = it.ratingImdb
 
-                tvDescDataRelize.text = it.premierWorld
+                tvDescDataRelize.text = ConverterDate().dateConverter(it.premierWorld)
 
                 tvDescLanght.text = ConverterMinutesToHour().converte(it.lenght)
-                tvDescBudget.text = it.budget
+                tvDescBudget.text = "${it.budget}${it.budgetCur}"
 
-                tvDescFeesRus.text = it.feesRus
-                tvDescFeesWorld.text = it.feesWorld
+                tvDescFeesRus.text = "${it.feesRus}${it.feesRusCur}"
+                tvDescFeesWorld.text = "${it.feesWorld}${it.feesWorldCur}"
             }
             personsList = gson.fromJson(it.person, listType)
             adapter?.list?.submitList(personsList)
