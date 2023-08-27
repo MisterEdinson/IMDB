@@ -119,6 +119,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigationDesc(nav: HomeMovieModel) {
-        findNavController().navigate(R.id.action_homeFragment_to_descriptFragment)
+        val bundle = Bundle()
+        nav.idkp?.let { bundle.putString("id", it) }
+        findNavController().navigate(R.id.action_homeFragment_to_descriptFragment, bundle)
     }
 }

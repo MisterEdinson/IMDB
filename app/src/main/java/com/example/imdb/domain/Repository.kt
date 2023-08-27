@@ -54,6 +54,12 @@ class Repository @Inject constructor(
         homeMovies.updateMovie(FavoriteDelete().deleteFavorite(delete))
     }
 
-    suspend fun getItem(id:String){
+    suspend fun getItem(id:String): FavoriteMovieModel{
+        var local = itemDesc.getItem(id)
+        if(local == null){
+            itemDesc.insertItem(MappingKinopoiskToFavorite().converter(retro.getItemMovies(id)))
+            local = itemDesc.getItem(id)
+        }
+        return local
     }
 }

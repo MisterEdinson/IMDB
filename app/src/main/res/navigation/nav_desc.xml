@@ -9,7 +9,11 @@
         android:id="@+id/descMainFragment"
         android:name="com.example.imdb.ui.description.tabs.DescMainFragment"
         android:label="fragment_desc_main"
-        tools:layout="@layout/fragment_desc_main" />
+        tools:layout="@layout/fragment_desc_main" >
+        <argument
+            android:name="model"
+            app:argType="com.example.imdb.data.local.model.FavoriteMovieModel" />
+    </fragment>
     <fragment
         android:id="@+id/descFactFragment"
         android:name="com.example.imdb.ui.description.tabs.DescFactFragment"

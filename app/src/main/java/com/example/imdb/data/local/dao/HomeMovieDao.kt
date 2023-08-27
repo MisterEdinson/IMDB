@@ -16,8 +16,8 @@ interface HomeMovieDao {
     @Query("SELECT * FROM home_movie ORDER BY raitingKp DESC")
     suspend fun getAll(): List<HomeMovieModel>
 
-    @Query("SELECT * FROM home_movie WHERE favorite LIKE :id")
-    suspend fun getAllFavorite(id:Int): List<HomeMovieModel>
+    @Query("SELECT * FROM home_movie WHERE favorite LIKE :favorite")
+    suspend fun getAllFavorite(favorite:Int): List<HomeMovieModel>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHomeMovie(insert: List<HomeMovieModel>)

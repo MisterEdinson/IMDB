@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgHeaderLabel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -46,7 +46,7 @@
         android:paddingEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imgHeaderLabel">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -91,7 +91,7 @@
         android:visibility="visible"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/imgHeaderLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,7 +109,7 @@
         android:layout_marginTop="4dp"
         android:visibility="invisible"
         android:background="@drawable/bg_linear_back"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/imgHeaderLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -124,8 +124,8 @@
         android:paddingBottom="3dp"
         android:visibility="gone"
         android:background="@drawable/bg_linear_favorite"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/imgHeaderLabel"
+        app:layout_constraintEnd_toEndOf="@+id/imgHeaderLabel"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_delete" />
 

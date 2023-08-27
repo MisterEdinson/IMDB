@@ -8,9 +8,12 @@ import com.example.imdb.data.local.model.FavoriteMovieModel
 
 @Dao
 interface FavoriteMovieDao {
-//    @Query("SELECT * FROM favorite_movie WHERE title LIKE :search")
-//    suspend fun getFavorite(search: String): FavoriteMovieModel
-//
+    @Query("SELECT * FROM favorite_movie WHERE idkp LIKE :idkp LIMIT 1")
+    suspend fun getItem(idkp: String): FavoriteMovieModel
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertItem(insert: FavoriteMovieModel)
+
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertFavorite(insert: FavoriteMovieModel)
 //

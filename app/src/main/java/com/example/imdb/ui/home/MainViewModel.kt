@@ -14,6 +14,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val moviesDefaultLiveData: MutableLiveData<List<HomeMovieModel>> = MutableLiveData()
     val movieAllFavoriteLiveData: MutableLiveData<List<HomeMovieModel>> = MutableLiveData()
+    val movieItemDescLiveData: MutableLiveData<FavoriteMovieModel> = MutableLiveData()
     var sort: String? = null
     var search: String? = null
 
@@ -62,6 +63,14 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
     fun deleteFavorite(favorite: HomeMovieModel){
         viewModelScope.launch {
             repo.delFavorite(favorite)
+        }
+    }
+
+    //подробнее о фильме
+    fun getItemDesc(id:String){
+        viewModelScope.launch {
+            val response = repo.getItem(id)
+            movieItemDescLiveData.value = response
         }
     }
 }

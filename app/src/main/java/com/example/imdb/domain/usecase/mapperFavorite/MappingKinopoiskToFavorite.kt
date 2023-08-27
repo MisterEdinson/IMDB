@@ -33,7 +33,7 @@ class MappingKinopoiskToFavorite {
             facts = Gson().toJson(kinopoisk.facts),
             budget = kinopoisk.budget?.value.toString(),
             budgetCur = kinopoisk.budget?.currency,
-            countries = kinopoisk.countries.toString(),
+            countries = kinopoisk.countries?.get(0)?.name,
             videos = Gson().toJson(kinopoisk.videos),
             person = Gson().toJson(kinopoisk.persons),
             namesynonym = Gson().toJson(kinopoisk.names),

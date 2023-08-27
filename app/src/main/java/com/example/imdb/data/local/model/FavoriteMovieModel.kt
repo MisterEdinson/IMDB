@@ -1,9 +1,11 @@
 package com.example.imdb.data.local.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
-@Entity(tableName = "favorite_movie")
+@Entity(tableName = "favorite_movie" , indices = [Index(value = ["idkp"], unique = true)])
 data class FavoriteMovieModel(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
@@ -38,4 +40,4 @@ data class FavoriteMovieModel(
     var namesynonym: String? = null,
     var similar: String? = null,
     var ageRating: String? = null,
-)
+): Serializable
