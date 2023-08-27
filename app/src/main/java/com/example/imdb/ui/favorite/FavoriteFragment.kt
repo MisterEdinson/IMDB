@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.imdb.R
 import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.databinding.FragmentFavoriteBinding
@@ -60,6 +61,7 @@ class FavoriteFragment : Fragment() {
             { del -> delFavorite(del) },
             { nav -> navigationDesc(nav) })
         binding.mainContainer.rvMovies.adapter = adapter
+        binding.mainContainer.rvMovies.layoutManager = GridLayoutManager(activity, 2)
     }
 
     private fun addFavorite(add: HomeMovieModel) {

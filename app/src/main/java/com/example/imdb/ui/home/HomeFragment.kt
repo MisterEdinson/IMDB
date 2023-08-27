@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.GridLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.imdb.R
 import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.databinding.FragmentHomeBinding
@@ -86,6 +88,7 @@ class HomeFragment : Fragment() {
             { nav -> navigationDesc(nav) }
         )
         binding.mainContainer.rvMovies.adapter = adapter
+        binding.mainContainer.rvMovies.layoutManager = GridLayoutManager(activity, 2)
 
         adapterSort = AdapterSort(context, resources.getStringArray(R.array.sort_array))
         binding.mainContainer.spSort.adapter = adapterSort

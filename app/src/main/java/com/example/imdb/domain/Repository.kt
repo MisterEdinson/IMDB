@@ -1,5 +1,6 @@
 package com.example.imdb.domain
 
+import com.example.imdb.data.local.dao.FavoriteMovieDao
 import com.example.imdb.data.local.dao.HomeMovieDao
 import com.example.imdb.data.local.model.FavoriteMovieModel
 import com.example.imdb.data.local.model.HomeMovieModel
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(
     private val retro: SimpleRetro,
-    private val homeMovies: HomeMovieDao
+    private val homeMovies: HomeMovieDao,
+    private val itemDesc: FavoriteMovieDao
 ) {
     suspend fun getMovies(): List<HomeMovieModel> {
         val default = MappingKinopoiskToHome().converter(retro.getMovies())
@@ -50,5 +52,8 @@ class Repository @Inject constructor(
 
     suspend fun delFavorite(delete: HomeMovieModel) {
         homeMovies.updateMovie(FavoriteDelete().deleteFavorite(delete))
+    }
+
+    suspend fun getItem(id:String){
     }
 }

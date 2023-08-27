@@ -13,7 +13,7 @@ interface HomeMovieDao {
     @Query("SELECT * FROM home_movie WHERE title LIKE :search")
     suspend fun getHomeMovie(search: String): HomeMovieModel
 
-    @Query("SELECT * FROM home_movie")
+    @Query("SELECT * FROM home_movie ORDER BY raitingKp DESC")
     suspend fun getAll(): List<HomeMovieModel>
 
     @Query("SELECT * FROM home_movie WHERE favorite LIKE :id")
