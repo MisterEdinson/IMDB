@@ -25,7 +25,7 @@ class AdapterMovies(
 
     val callback = object : DiffUtil.ItemCallback<HomeMovieModel>() {
         override fun areItemsTheSame(oldItem: HomeMovieModel, newItem: HomeMovieModel): Boolean {
-            return oldItem.idkp == newItem.idkp
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: HomeMovieModel, newItem: HomeMovieModel): Boolean {

@@ -41,6 +41,9 @@ class DescSimilarFragment : Fragment() {
             similarList = gson.fromJson(it.similar, listType)
             adapter?.list?.submitList(similarList)
         }
+        binding.tvBtnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun initAdapter() {

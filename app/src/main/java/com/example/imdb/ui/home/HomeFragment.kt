@@ -72,8 +72,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun visibleBtnFavorite() {
-        viewModel.movieAllFavoriteLiveData.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
+        viewModel.favoriteIndicator.observe(viewLifecycleOwner) {
+            if (it > 0) {
                 binding.mainContainer.tvBtnFavorite.visibility = View.VISIBLE
             } else {
                 binding.mainContainer.tvBtnFavorite.visibility = View.INVISIBLE
@@ -119,8 +119,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigationDesc(nav: HomeMovieModel) {
-        val bundle = Bundle()
-        nav.idkp?.let { bundle.putString("id", it) }
-        findNavController().navigate(R.id.action_homeFragment_to_descriptFragment, bundle)
+
+        if(nav.idkp == "null"){
+            Toast.makeText(context, "Ошибка кинопоиска", Toast.LENGTH_LONG).show()
+        }else{
+            val bundle = Bundle()
+            nav.idkp?.let { bundle.putString("id", nav.idkp) }
+            findNavController().navigate(R.id.action_homeFragment_to_descriptFragment, bundle)
+        }
     }
 }

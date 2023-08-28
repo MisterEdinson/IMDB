@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.imdb.R
 import com.example.imdb.data.local.model.HomeMovieModel
+import com.example.imdb.databinding.DialogClearBinding
 import com.example.imdb.databinding.FragmentFavoriteBinding
 import com.example.imdb.ui.home.AdapterMovies
 import com.example.imdb.ui.home.MainViewModel
+import com.example.imdb.ui.home.SearchTextWatcher
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,10 +45,6 @@ class FavoriteFragment : Fragment() {
             initAdapter()
             viewModel.getAllFavorite()
             viewModel.movieAllFavoriteLiveData.observe(viewLifecycleOwner) {
-                if (it.isEmpty()) {
-                    viewModel.getMovies()
-                    findNavController().navigate(R.id.action_favoriteFragment_to_homeFragment)
-                }
                 adapter?.list?.submitList(it)
             }
 
@@ -52,6 +52,16 @@ class FavoriteFragment : Fragment() {
                 viewModel.getMovies()
                 findNavController().navigate(R.id.action_favoriteFragment_to_homeFragment)
             }
+
+            imgBtnClear.setOnClickListener{
+                dialogClear()
+            }
+
+            etSearch.addTextChangedListener(object : SearchTextWatcher {
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+            })
         }
     }
 
@@ -77,6 +87,29 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun navigationDesc(nav: HomeMovieModel) {
-        findNavController().navigate(R.id.action_homeFragment_to_descriptFragment)
+        val bundle = Bundle()
+        nav.idkp?.let { bundle.putString("id", it) }
+        findNavController().navigate(R.id.action_favoriteFragment_to_descriptFragment, bundle)
+    }
+
+
+
+    private fun dialogClear() {
+        val builder = AlertDialog.Builder(binding.root.context)
+        val dialogBind =
+            DialogClearBinding.inflate(LayoutInflater.from(binding.root.context), null, false)
+        builder.setView(dialogBind.root)
+        val dialog = builder.create()
+
+        dialogBind.tvNoClear.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialogBind.tvYesClear.setOnClickListener {
+            dialog.dismiss()
+            viewModel.deleteAllFavorite()
+            viewModel.favoriteIndicator.value = 0
+            findNavController().navigate(R.id.action_favoriteFragment_to_homeFragment)
+        }
+        dialog.show()
     }
 }

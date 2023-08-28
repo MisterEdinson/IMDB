@@ -51,10 +51,15 @@ class DescMainFragment : Fragment() {
                 tvDescDataRelize.text = ConverterDate().dateConverter(it.premierWorld)
 
                 tvDescLanght.text = ConverterMinutesToHour().converte(it.lenght)
-                tvDescBudget.text = "${it.budget}${it.budgetCur}"
-
-                tvDescFeesRus.text = "${it.feesRus}${it.feesRusCur}"
-                tvDescFeesWorld.text = "${it.feesWorld}${it.feesWorldCur}"
+                if(it.budget != "null"){ tvDescBudget.text = "${it.budget}${it.budgetCur}" }else{
+                    tvDescBudget.text = "неизвестно"
+                }
+                if(it.feesRus != "null"){tvDescFeesRus.text = "${it.feesRus}${it.feesRusCur}"}else{
+                    tvDescFeesRus.text = "неизвестно"
+                }
+                if(it.feesWorld != "null"){tvDescFeesWorld.text = "${it.feesWorld}${it.feesWorldCur}"}else{
+                    tvDescFeesWorld.text = "неизвестно"
+                }
             }
             personsList = gson.fromJson(it.person, listType)
             adapter?.list?.submitList(personsList)

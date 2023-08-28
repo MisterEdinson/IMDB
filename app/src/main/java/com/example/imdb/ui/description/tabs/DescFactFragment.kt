@@ -37,9 +37,12 @@ class DescFactFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         val gson = Gson()
-        viewModel.movieItemDescLiveData.observe(viewLifecycleOwner){
+        viewModel.movieItemDescLiveData.observe(viewLifecycleOwner) {
             factssList = gson.fromJson(it.facts, listType)
             adapter?.list?.submitList(factssList)
+        }
+        binding.tvBtnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

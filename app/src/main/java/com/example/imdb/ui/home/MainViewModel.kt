@@ -1,5 +1,6 @@
 package com.example.imdb.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,21 +16,24 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
     val moviesDefaultLiveData: MutableLiveData<List<HomeMovieModel>> = MutableLiveData()
     val movieAllFavoriteLiveData: MutableLiveData<List<HomeMovieModel>> = MutableLiveData()
     val movieItemDescLiveData: MutableLiveData<FavoriteMovieModel> = MutableLiveData()
+    val favoriteIndicator: MutableLiveData<Int> = MutableLiveData()
     var sort: String? = null
     var search: String? = null
 
-    init {
-        getMovies()
-        getAllFavorite()
-    }
-    //По умолчанию - первый запуск
+    //Запрос к API и обновление данных в БД
     fun getMovies() {
         viewModelScope.launch {
             val response = repo.getMovies()
             moviesDefaultLiveData.value = response
         }
     }
-
+    //
+    fun getCountFavorite(){
+        viewModelScope.launch {
+            val response = repo.getCountFavorite()
+            favoriteIndicator.value = response
+        }
+    }
     //поиск на сервере
     fun searchMovie(search: String, sort: String?) {
         viewModelScope.launch {
@@ -37,6 +41,14 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
             moviesDefaultLiveData.value = response
         }
     }
+
+    fun searchFavoriteLocal(search:String){
+        viewModelScope.launch {
+            val response = repo.searchFavoriteLocal(search)
+            movieAllFavoriteLiveData.value = response
+        }
+    }
+
     // вернуть все избранные
     fun getAllFavorite() {
         viewModelScope.launch {
@@ -63,6 +75,12 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
     fun deleteFavorite(favorite: HomeMovieModel){
         viewModelScope.launch {
             repo.delFavorite(favorite)
+        }
+    }
+
+    fun deleteAllFavorite(){
+        viewModelScope.launch {
+            repo.delAllFavorite()
         }
     }
 

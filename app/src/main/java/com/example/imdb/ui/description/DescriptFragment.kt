@@ -48,6 +48,9 @@ class DescriptFragment : Fragment() {
             tvBtnSimilar.setOnClickListener {
                 findNavController().navigate(R.id.action_descriptFragment_to_descSimilarFragment2)
             }
+            tvBtnBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
     }
 }

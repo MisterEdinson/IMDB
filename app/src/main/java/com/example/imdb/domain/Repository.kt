@@ -23,27 +23,33 @@ class Repository @Inject constructor(
         return homeMovies.getAll()
     }
 
-    suspend fun getLocal(): List<HomeMovieModel>{
+    suspend fun getLocal(): List<HomeMovieModel> {
         return homeMovies.getAll()
     }
 
     suspend fun searchMovie(search: String, sort: String?): List<HomeMovieModel> {
-        homeMovies.deleteOld()
+
         val res = MappingKinopoiskToHome()
             .converter(
                 retro.getMoviesSearch(
-                    6,
+                    30,
                     search,
                     "name",
-                    sort ?: "rating.kp"
+                    sort ?: "rating.kp",
+                    "movie"
                 )
             )
+        homeMovies.deleteOld()
         homeMovies.insertHomeMovie(res)
         return homeMovies.getAll()
     }
 
+    suspend fun searchFavoriteLocal(search: String): List<HomeMovieModel> {
+        return homeMovies.searchLocalFavorite(search)
+    }
+
     suspend fun getAllFavorite(): List<HomeMovieModel> {
-        return homeMovies.getAllFavorite(1)
+        return homeMovies.getAllFavorite()
     }
 
     suspend fun addFavorite(insert: HomeMovieModel) {
@@ -54,12 +60,21 @@ class Repository @Inject constructor(
         homeMovies.updateMovie(FavoriteDelete().deleteFavorite(delete))
     }
 
-    suspend fun getItem(id:String): FavoriteMovieModel{
-        var local = itemDesc.getItem(id)
-        if(local == null){
+    suspend fun delAllFavorite() {
+        homeMovies.deleteAllFavorite()
+    }
+
+    suspend fun getCountFavorite(): Int {
+        return homeMovies.getcountFavorite(1)
+    }
+
+    suspend fun getItem(id: String): FavoriteMovieModel {
+        val checkLoc = itemDesc.checkLocal(id)
+        return if (checkLoc == 0) {
             itemDesc.insertItem(MappingKinopoiskToFavorite().converter(retro.getItemMovies(id)))
-            local = itemDesc.getItem(id)
+            itemDesc.getItem(id)
+        } else {
+            itemDesc.getItem(id)
         }
-        return local
     }
 }

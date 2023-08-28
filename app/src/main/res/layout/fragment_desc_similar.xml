@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.description.tabs.DescSimilarFragment">
 
+    <TextView
+        android:id="@+id/tvBtnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_marginTop="14dp"
+        android:visibility="visible"
+        android:background="@drawable/bg_linear_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSimilarHeaderLabel"
@@ -14,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Похожие фильмы: "
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

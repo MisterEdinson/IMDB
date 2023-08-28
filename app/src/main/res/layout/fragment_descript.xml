@@ -10,6 +10,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvBtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:visibility="visible"
+            android:background="@drawable/bg_linear_back"
+            app:layout_constraintBottom_toBottomOf="@+id/imgHeaderLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/imgHeaderLabel"
             android:layout_width="match_parent"
@@ -39,7 +58,7 @@
             android:src="@drawable/avatar"
             app:layout_constraintBottom_toBottomOf="@+id/imgCenterBg"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imgCenterBg"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgHeaderLabel" />
 
         <androidx.fragment.app.FragmentContainerView
@@ -62,7 +81,8 @@
             android:padding="8dp"
             android:text="Описание"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:background="@drawable/bg_circle_tabs"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/tvBtnFact"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +94,7 @@
             android:layout_height="wrap_content"
             android:text="Факты"
             android:padding="8dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/tvBtnDesc"
             app:layout_constraintEnd_toStartOf="@+id/tvBtnTrailer"
             app:layout_constraintHorizontal_bias="0.5"
@@ -87,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="Трейлер"
             android:padding="8dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/tvBtnFact"
             app:layout_constraintEnd_toStartOf="@+id/tvBtnSimilar"
             app:layout_constraintHorizontal_bias="0.5"
@@ -100,7 +120,7 @@
             android:layout_height="wrap_content"
             android:text="Похожие фильмы"
             android:padding="8dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/tvBtnTrailer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

@@ -13,18 +13,27 @@ interface HomeMovieDao {
     @Query("SELECT * FROM home_movie WHERE title LIKE :search")
     suspend fun getHomeMovie(search: String): HomeMovieModel
 
-    @Query("SELECT * FROM home_movie ORDER BY raitingKp DESC")
+    @Query("SELECT * FROM home_movie WHERE title LIKE '%' || :search || '%' AND favorite = 1")
+    suspend fun searchLocalFavorite(search: String): List<HomeMovieModel>
+
+    @Query("SELECT * FROM home_movie WHERE favorite = 0 ORDER BY raitingKp DESC")
     suspend fun getAll(): List<HomeMovieModel>
 
-    @Query("SELECT * FROM home_movie WHERE favorite LIKE :favorite")
-    suspend fun getAllFavorite(favorite:Int): List<HomeMovieModel>
+    @Query("SELECT * FROM home_movie WHERE favorite = 1")
+    suspend fun getAllFavorite(): List<HomeMovieModel>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHomeMovie(insert: List<HomeMovieModel>)
 
+    @Query("SELECT COUNT(*) FROM home_movie WHERE favorite LIKE :favorite")
+    suspend fun getcountFavorite(favorite:Int): Int
+
     @Update
     suspend fun updateMovie(movie: HomeMovieModel)
 
-    @Query("DELETE FROM home_movie WHERE favorite = 0 AND id NOT IN (SELECT id FROM home_movie WHERE favorite = 1 ORDER BY id DESC LIMIT 30)")
+    @Query("DELETE FROM home_movie WHERE favorite = 0")
     suspend fun deleteOld()
+
+    @Query("DELETE FROM home_movie WHERE favorite = 1")
+    suspend fun deleteAllFavorite()
 }

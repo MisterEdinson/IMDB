@@ -14,9 +14,7 @@ interface FavoriteMovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItem(insert: FavoriteMovieModel)
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertFavorite(insert: FavoriteMovieModel)
-//
-//    @Query("SELECT * FROM favorite_movie WHERE idkp LIKE :id")
-//    suspend fun searchItem(id: String): FavoriteMovieDao
+    @Query("SELECT COUNT(*) FROM favorite_movie WHERE idkp LIKE :idkp")
+    suspend fun checkLocal(idkp:String): Int
+
 }

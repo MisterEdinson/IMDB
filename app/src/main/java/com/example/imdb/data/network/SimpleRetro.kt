@@ -16,6 +16,7 @@ interface SimpleRetro {
         @Query("search") search:String,
         @Query("field") field:String,
         @Query("sortField") sort:String,
+        @Query("type") type:String,
     ): Kinopoisk
 
     @GET("movie/{movie_id}")

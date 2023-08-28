@@ -28,7 +28,7 @@
         android:layout_margin="4dp"
         android:padding="4dp"
         android:text="На создание картины режиссёрский дуэт вдохновила увиденная ими в 2004 году документальная лента, в которой рассказывалось о том, как молодой житель предместья был нанят присматривать за парализованным инвалидом Филиппом Поццо ди Борго, который остался парализованным после несчастного случая 27 июля 1993 года."
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvCountFacts"
