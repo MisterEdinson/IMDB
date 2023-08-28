@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_desc"
+    app:startDestination="@id/descMainFragment">
+
+    <fragment
+        android:id="@+id/descMainFragment"
+        android:name="com.example.imdb.ui.description.tabs.DescMainFragment"
+        android:label="fragment_desc_main"
+        tools:layout="@layout/fragment_desc_main" >
+        <argument
+            android:name="model"
+            app:argType="com.example.imdb.data.local.model.FavoriteMovieModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/descFactFragment"
+        android:name="com.example.imdb.ui.description.tabs.DescFactFragment"
+        android:label="fragment_desc_fact"
+        tools:layout="@layout/fragment_desc_fact" />
+    <fragment
+        android:id="@+id/descSimilarFragment"
+        android:name="com.example.imdb.ui.description.tabs.DescSimilarFragment"
+        android:label="fragment_desc_similar"
+        tools:layout="@layout/fragment_desc_similar" />
+    <fragment
+        android:id="@+id/descTrailerFragment"
+        android:name="com.example.imdb.ui.description.tabs.DescTrailerFragment"
+        android:label="fragment_desc_trailer"
+        tools:layout="@layout/fragment_desc_trailer" />
+</navigation>

@@ -1,14 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.description.DescriptFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgHeaderLabel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/imgCenterBg"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bkg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgHeaderLabel" />
+
+        <ImageView
+            android:id="@+id/imgCenterPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:src="@drawable/avatar"
+            app:layout_constraintBottom_toBottomOf="@+id/imgCenterBg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imgCenterBg"
+            app:layout_constraintTop_toBottomOf="@+id/imgHeaderLabel" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/frContainerDesc"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvBtnDesc"
+            app:navGraph="@navigation/nav_desc" />
+
+        <TextView
+            android:id="@+id/tvBtnDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:text="Описание"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/tvBtnFact"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgCenterBg" />
+
+        <TextView
+            android:id="@+id/tvBtnFact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Факты"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBtnDesc"
+            app:layout_constraintEnd_toStartOf="@+id/tvBtnTrailer"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvBtnDesc"
+            app:layout_constraintTop_toTopOf="@+id/tvBtnDesc" />
+
+        <TextView
+            android:id="@+id/tvBtnTrailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Трейлер"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBtnFact"
+            app:layout_constraintEnd_toStartOf="@+id/tvBtnSimilar"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvBtnFact"
+            app:layout_constraintTop_toTopOf="@+id/tvBtnFact" />
+
+        <TextView
+            android:id="@+id/tvBtnSimilar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Похожие фильмы"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBtnTrailer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvBtnTrailer"
+            app:layout_constraintTop_toTopOf="@+id/tvBtnTrailer" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
