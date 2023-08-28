@@ -49,5 +49,29 @@
         <action
             android:id="@+id/action_descriptFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_descriptFragment_to_descFactFragment2"
+            app:destination="@id/descFactFragment2" />
+        <action
+            android:id="@+id/action_descriptFragment_to_descSimilarFragment2"
+            app:destination="@id/descSimilarFragment2" />
+        <action
+            android:id="@+id/action_descriptFragment_to_descTrailerFragment2"
+            app:destination="@id/descTrailerFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/descFactFragment2"
+        android:name="com.example.imdb.ui.description.tabs.DescFactFragment"
+        android:label="fragment_desc_fact"
+        tools:layout="@layout/fragment_desc_fact" />
+    <fragment
+        android:id="@+id/descSimilarFragment2"
+        android:name="com.example.imdb.ui.description.tabs.DescSimilarFragment"
+        android:label="fragment_desc_similar"
+        tools:layout="@layout/fragment_desc_similar" />
+    <fragment
+        android:id="@+id/descTrailerFragment2"
+        android:name="com.example.imdb.ui.description.tabs.DescTrailerFragment"
+        android:label="fragment_desc_trailer"
+        tools:layout="@layout/fragment_desc_trailer" />
 </navigation>
