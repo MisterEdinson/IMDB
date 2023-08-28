@@ -10,23 +10,25 @@
     tools:context=".ui.splash.SplashFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvInternetDisconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Интернет соединение отсутствует..."
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnInternetDisconnect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnInternetDisconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="Обновить"
+        android:visibility="invisible"
         android:background="@drawable/style_btn_splash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
