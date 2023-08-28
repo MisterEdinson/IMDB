@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.description.tabs.DescMainFragment">
+
+    <TextView
+        android:id="@+id/tvDescTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="start"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1+1" />
+
+    <TextView
+        android:id="@+id/tvDescText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescCountryLabel"
+        tools:text="Пострадав в результате несчастного случая, богатый аристократ Филипп нанимает в помощники человека, который менее всего подходит для этой работы, – молодого жителя предместья Дрисса, только что освободившегося из тюрьмы. Несмотря на то, что Филипп прикован к инвалидному креслу, Дриссу удается привнести в размеренную жизнь аристократа дух приключений." />
+
+    <TextView
+        android:id="@+id/tvDescRaitingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescText"
+        android:text="Рейтинги:" />
+
+    <TextView
+        android:id="@+id/tvDescImdbLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="IMDB:"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescRaitingLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescRaitingLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvDescRaitingLabel" />
+
+    <TextView
+        android:id="@+id/tvDescImdbRaiting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        tools:text="7.5"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescImdbLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescImdbLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvDescImdbLabel" />
+
+    <TextView
+        android:id="@+id/tvDescKpLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Кинопоиск:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescImdbRaiting"
+        app:layout_constraintStart_toEndOf="@+id/tvDescImdbRaiting"
+        app:layout_constraintTop_toTopOf="@+id/tvDescImdbRaiting" />
+
+    <TextView
+        android:id="@+id/tvDescKpRaiting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="8.5"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescKpLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescKpLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvDescKpLabel" />
+
+    <TextView
+        android:id="@+id/tvDescDataRelizeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Дата релиза:"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescRaitingLabel" />
+
+    <TextView
+        android:id="@+id/tvDescDataRelize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="10 мая 2023"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescDataRelizeLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescDataRelizeLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvDescDataRelizeLabel" />
+
+    <TextView
+        android:id="@+id/tvDescCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescCountryLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescCountryLabel"
+        tools:text="Франция" />
+
+    <TextView
+        android:id="@+id/tvDescCountryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Страна:"
+        app:layout_constraintStart_toStartOf="@+id/tvDescTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescTitle" />
+
+    <TextView
+        android:id="@+id/tvDescYearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Год:"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescCountry"
+        app:layout_constraintStart_toEndOf="@+id/tvDescCountry"
+        app:layout_constraintTop_toTopOf="@+id/tvDescCountry" />
+
+    <TextView
+        android:id="@+id/tvDescYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="2016"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescYearLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescYearLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvDescYearLabel" />
+
+    <TextView
+        android:id="@+id/tvDescLanghtLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Продолжительность: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescDataRelizeLabel" />
+
+    <TextView
+        android:id="@+id/tvDescLanght"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="1ч 23мин"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescLanghtLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescLanghtLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvDescLanghtLabel" />
+
+    <TextView
+        android:id="@+id/tvDescBudgetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Бюджет:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescLanghtLabel" />
+
+    <TextView
+        android:id="@+id/tvDescBudget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        tools:text="9500000"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescBudgetLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvDescBudgetLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvDescBudgetLabel" />
+
+    <TextView
+        android:id="@+id/tvDescBudgetCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        tools:text="€"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescBudget"
+        app:layout_constraintStart_toEndOf="@+id/tvDescBudget"
+        app:layout_constraintTop_toTopOf="@+id/tvDescBudget" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Прокат:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescBudgetLabel" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Мир:"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView21"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/tvDescFeesWorld"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="426588510$"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView22"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Россия:"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescFeesWorld"
+        app:layout_constraintStart_toEndOf="@+id/tvDescFeesWorld"
+        app:layout_constraintTop_toTopOf="@+id/tvDescFeesWorld" />
+
+    <TextView
+        android:id="@+id/tvDescFeesRus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="1725813$"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView24"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintTop_toTopOf="@+id/textView24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvActor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21"
+        tools:listitem="@layout/item_actor" />
+</androidx.constraintlayout.widget.ConstraintLayout>
