@@ -59,7 +59,7 @@ class FavoriteFragment : Fragment() {
 
             etSearch.addTextChangedListener(object : SearchTextWatcher {
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                    searchFavLocal(p0.toString())
                 }
             })
         }
@@ -92,7 +92,13 @@ class FavoriteFragment : Fragment() {
         findNavController().navigate(R.id.action_favoriteFragment_to_descriptFragment, bundle)
     }
 
-
+    private fun searchFavLocal(search:String){
+        if(search.length > 0){
+            viewModel.searchFavoriteLocal(search)
+        }else{
+            viewModel.getAllFavorite()
+        }
+    }
 
     private fun dialogClear() {
         val builder = AlertDialog.Builder(binding.root.context)
