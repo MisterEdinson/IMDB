@@ -12,9 +12,9 @@ import com.example.imdb.databinding.ItemFactBinding
 import com.example.imdb.domain.util.removeHtmlTags
 
 class AdapterDescriptFacts : RecyclerView.Adapter<AdapterDescriptFacts.FactHolder>() {
-    class FactHolder(view: View): RecyclerView.ViewHolder(view)
+    class FactHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    val callback = object : DiffUtil.ItemCallback<FactsItem>(){
+    val callback = object : DiffUtil.ItemCallback<FactsItem>() {
         override fun areItemsTheSame(oldItem: FactsItem, newItem: FactsItem): Boolean {
             return oldItem.value == newItem.value
         }
@@ -37,7 +37,7 @@ class AdapterDescriptFacts : RecyclerView.Adapter<AdapterDescriptFacts.FactHolde
     override fun onBindViewHolder(holder: FactHolder, position: Int) {
         val item = list.currentList[position]
         val binding = ItemFactBinding.bind(holder.itemView)
-        binding.tvCountFacts.text = (position+1).toString()
+        binding.tvCountFacts.text = (position + 1).toString()
         binding.tvTextFact.text = removeHtmlTags(item.value)
     }
 }

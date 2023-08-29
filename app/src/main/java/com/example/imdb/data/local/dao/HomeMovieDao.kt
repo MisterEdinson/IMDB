@@ -28,6 +28,9 @@ interface HomeMovieDao {
     @Query("SELECT COUNT(*) FROM home_movie WHERE favorite LIKE :favorite")
     suspend fun getcountFavorite(favorite:Int): Int
 
+    @Query("SELECT COUNT(*) FROM home_movie WHERE favorite = 0")
+    suspend fun getmoviesDefault(): Int
+
     @Update
     suspend fun updateMovie(movie: HomeMovieModel)
 

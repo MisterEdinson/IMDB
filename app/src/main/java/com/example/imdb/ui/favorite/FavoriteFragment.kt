@@ -67,17 +67,11 @@ class FavoriteFragment : Fragment() {
 
     private fun initAdapter() {
         adapter = AdapterMovies(
-            { add -> addFavorite(add) },
+            { add -> delFavorite(add) },
             { del -> delFavorite(del) },
             { nav -> navigationDesc(nav) })
         binding.mainContainer.rvMovies.adapter = adapter
         binding.mainContainer.rvMovies.layoutManager = GridLayoutManager(activity, 2)
-    }
-
-    private fun addFavorite(add: HomeMovieModel) {
-        viewModel.addFavorite(add)
-        viewModel.getAllFavorite()
-        Toast.makeText(context, "Добавлено: ${add.title}", Toast.LENGTH_SHORT).show()
     }
 
     private fun delFavorite(del: HomeMovieModel) {

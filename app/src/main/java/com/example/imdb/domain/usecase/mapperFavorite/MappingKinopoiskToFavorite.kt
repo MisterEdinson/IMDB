@@ -3,6 +3,7 @@ package com.example.imdb.domain.usecase.mapperFavorite
 import com.example.imdb.data.local.model.FavoriteMovieModel
 import com.example.imdb.data.network.model.kinopoiskMovie.KinopoiskMovie
 import com.google.gson.Gson
+import okhttp3.internal.wait
 
 class MappingKinopoiskToFavorite {
     fun converter(kinopoisk: KinopoiskMovie): FavoriteMovieModel {
@@ -28,7 +29,7 @@ class MappingKinopoiskToFavorite {
             premierWorld = kinopoisk.premiere?.world,
             premierRus = kinopoisk.premiere?.russia,
             year = kinopoisk.year.toString(),
-            poster = kinopoisk.poster?.previewUrl,
+            poster = kinopoisk.poster?.url,
             genres = Gson().toJson(kinopoisk.genres),
             facts = Gson().toJson(kinopoisk.facts),
             budget = kinopoisk.budget?.value.toString(),

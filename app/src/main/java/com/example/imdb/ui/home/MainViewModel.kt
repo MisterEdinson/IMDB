@@ -1,6 +1,5 @@
 package com.example.imdb.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,21 +19,20 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
     var sort: String? = null
     var search: String? = null
 
-    //Запрос к API и обновление данных в БД
     fun getMovies() {
         viewModelScope.launch {
             val response = repo.getMovies()
             moviesDefaultLiveData.value = response
         }
     }
-    //
-    fun getCountFavorite(){
+
+    fun getCountFavorite() {
         viewModelScope.launch {
             val response = repo.getCountFavorite()
             favoriteIndicator.value = response
         }
     }
-    //поиск на сервере
+
     fun searchMovie(search: String, sort: String?) {
         viewModelScope.launch {
             val response = repo.searchMovie(search, sort)
@@ -42,14 +40,13 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         }
     }
 
-    fun searchFavoriteLocal(search:String){
+    fun searchFavoriteLocal(search: String) {
         viewModelScope.launch {
             val response = repo.searchFavoriteLocal(search)
             movieAllFavoriteLiveData.value = response
         }
     }
 
-    // вернуть все избранные
     fun getAllFavorite() {
         viewModelScope.launch {
             val response = repo.getAllFavorite()
@@ -57,35 +54,32 @@ class MainViewModel @Inject constructor(private val repo: Repository) : ViewMode
         }
     }
 
-    fun getAllLocal(){
+    fun getAllLocal() {
         viewModelScope.launch {
             val res = repo.getLocal()
             moviesDefaultLiveData.value = res
         }
     }
 
-    // добавить избранное
-    fun addFavorite(favorite: HomeMovieModel){
-       viewModelScope.launch {
-           repo.addFavorite(favorite)
-       }
+    fun addFavorite(favorite: HomeMovieModel) {
+        viewModelScope.launch {
+            repo.addFavorite(favorite)
+        }
     }
 
-    // Удалить избранное
-    fun deleteFavorite(favorite: HomeMovieModel){
+    fun deleteFavorite(favorite: HomeMovieModel) {
         viewModelScope.launch {
             repo.delFavorite(favorite)
         }
     }
 
-    fun deleteAllFavorite(){
+    fun deleteAllFavorite() {
         viewModelScope.launch {
             repo.delAllFavorite()
         }
     }
 
-    //подробнее о фильме
-    fun getItemDesc(id:String){
+    fun getItemDesc(id: String) {
         viewModelScope.launch {
             val response = repo.getItem(id)
             movieItemDescLiveData.value = response

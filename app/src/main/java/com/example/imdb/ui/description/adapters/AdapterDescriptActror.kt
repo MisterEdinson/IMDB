@@ -11,10 +11,10 @@ import com.example.imdb.R
 import com.example.imdb.data.network.model.kinopoiskMovie.PersonsItem
 import com.example.imdb.databinding.ItemActorBinding
 
-class AdapterDescriptActror: RecyclerView.Adapter<AdapterDescriptActror.ActorHolder>() {
+class AdapterDescriptActror : RecyclerView.Adapter<AdapterDescriptActror.ActorHolder>() {
     class ActorHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    val callback = object : DiffUtil.ItemCallback<PersonsItem>(){
+    val callback = object : DiffUtil.ItemCallback<PersonsItem>() {
         override fun areItemsTheSame(oldItem: PersonsItem, newItem: PersonsItem): Boolean {
             return oldItem.id == newItem.id
         }

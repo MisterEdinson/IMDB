@@ -9,6 +9,11 @@ import com.example.imdb.domain.usecase.addFavorite.FavoriteAdd
 import com.example.imdb.domain.usecase.deleteFavorite.FavoriteDelete
 import com.example.imdb.domain.usecase.mapperFavorite.MappingKinopoiskToFavorite
 import com.example.imdb.domain.usecase.mapperHome.MappingKinopoiskToHome
+import com.example.imdb.domain.util.Constants.Companion.FAVORITE
+import com.example.imdb.domain.util.Constants.Companion.SORT_LIMIT
+import com.example.imdb.domain.util.Constants.Companion.SORT_NAME
+import com.example.imdb.domain.util.Constants.Companion.SORT_RATING_KP
+import com.example.imdb.domain.util.Constants.Companion.SORT_TYPE
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -17,9 +22,29 @@ class Repository @Inject constructor(
     private val itemDesc: FavoriteMovieDao
 ) {
     suspend fun getMovies(): List<HomeMovieModel> {
-        val default = MappingKinopoiskToHome().converter(retro.getMovies())
+        var page = 1
+        val default = MappingKinopoiskToHome()
+            .converter(
+                retro.getMoviesDefault(
+                    SORT_LIMIT,
+                    SORT_TYPE,
+                    page
+                )
+            )
         homeMovies.deleteOld()
         homeMovies.insertHomeMovie(default)
+        while (homeMovies.getmoviesDefault() < SORT_LIMIT){
+            page += 1
+            val add = MappingKinopoiskToHome()
+                .converter(
+                    retro.getMoviesDefault(
+                        SORT_LIMIT,
+                        SORT_TYPE,
+                        page
+                    )
+                )
+            homeMovies.insertHomeMovie(add)
+        }
         return homeMovies.getAll()
     }
 
@@ -32,11 +57,11 @@ class Repository @Inject constructor(
         val res = MappingKinopoiskToHome()
             .converter(
                 retro.getMoviesSearch(
-                    30,
+                    SORT_LIMIT,
                     search,
-                    "name",
-                    sort ?: "rating.kp",
-                    "movie"
+                    SORT_NAME,
+                    sort ?: SORT_RATING_KP,
+                    SORT_TYPE
                 )
             )
         homeMovies.deleteOld()
@@ -65,7 +90,7 @@ class Repository @Inject constructor(
     }
 
     suspend fun getCountFavorite(): Int {
-        return homeMovies.getcountFavorite(1)
+        return homeMovies.getcountFavorite(FAVORITE)
     }
 
     suspend fun getItem(id: String): FavoriteMovieModel {

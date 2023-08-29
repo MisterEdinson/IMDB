@@ -19,6 +19,13 @@ interface SimpleRetro {
         @Query("type") type:String,
     ): Kinopoisk
 
+    @GET("movie")
+    suspend fun getMoviesDefault(
+        @Query("limit") limit: Int,
+        @Query("type") type:String,
+        @Query("page") page:Int,
+    ): Kinopoisk
+
     @GET("movie/{movie_id}")
     suspend fun getItemMovies(@Path("movie_id") id: String): KinopoiskMovie
 }

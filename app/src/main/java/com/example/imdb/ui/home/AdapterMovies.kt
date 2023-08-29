@@ -3,7 +3,6 @@ package com.example.imdb.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +10,6 @@ import coil.load
 import com.example.imdb.R
 import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.databinding.ItemMovieBinding
-import com.example.imdb.domain.util.loadImage
 
 class AdapterMovies(
     val addFavorite: (HomeMovieModel) -> Unit,
@@ -44,31 +42,38 @@ class AdapterMovies(
 
     override fun onBindViewHolder(holder: MoviesHolder, position: Int) {
         val item = list.currentList[position]
-        item.poster?.let{
-            val binding = ItemMovieBinding.bind(holder.itemView)
-            binding.apply {
-                tvReutingKp.text = item.raitingKp
-                tvReutingImdb.text = item.raitingImdb
-                item.poster?.let { imgPoster.load(item.poster) }
+        var indicator = 0
 
-                when(item.favorite){
-                    0 -> binding.imgFavorite.load(R.drawable.ic_fav_no_click)
-                    1 -> binding.imgFavorite.load(R.drawable.ic_fav_click)
-                }
+        val binding = ItemMovieBinding.bind(holder.itemView)
+        binding.apply {
+            tvReutingKp.text = item.raitingKp
+            tvReutingImdb.text = item.raitingImdb
+            item.poster?.let { imgPoster.load(item.poster) }
 
-                imgPoster.setOnClickListener {
-                    navigate(item)
-                }
+            when (item.favorite) {
+                0 -> imgFavorite.load(R.drawable.ic_fav_no_click)
+                1 -> imgFavorite.load(R.drawable.ic_fav_click)
+            }
 
-                imgFavorite.setOnClickListener {
-                    when(item.favorite){
-                        0 -> addFavorite(item)
-                        1 -> delFavorite(item)
+            imgPoster.setOnClickListener {
+                navigate(item)
+            }
+
+            imgFavorite.setOnClickListener {
+                when (indicator) {
+                    0 -> {
+                        addFavorite(item)
+                        imgFavorite.load(R.drawable.ic_fav_click)
+                        indicator = 1
+                    }
+
+                    1 -> {
+                        delFavorite(item)
+                        imgFavorite.load(R.drawable.ic_fav_no_click)
+                        indicator = 0
                     }
                 }
             }
-        } ?: {
-            holder.itemView.visibility = View.GONE
         }
     }
 }

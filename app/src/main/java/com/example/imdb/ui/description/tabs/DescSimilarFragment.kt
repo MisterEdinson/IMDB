@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.imdb.R
-import com.example.imdb.data.network.model.kinopoiskMovie.PersonsItem
 import com.example.imdb.data.network.model.kinopoiskMovie.SimilarMoviesItem
 import com.example.imdb.databinding.FragmentDescSimilarBinding
 import com.example.imdb.ui.description.adapters.AdapterDescriptSimilar

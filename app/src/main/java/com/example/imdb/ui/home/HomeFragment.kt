@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.GridLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.imdb.R
 import com.example.imdb.data.local.model.HomeMovieModel
 import com.example.imdb.databinding.FragmentHomeBinding
@@ -34,10 +33,10 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        viewModel.getCountFavorite()
         viewModel.moviesDefaultLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
         }
@@ -62,9 +61,7 @@ class HomeFragment : Fragment() {
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
             }
-
             visibleBtnFavorite()
-
             tvBtnFavorite.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
             }
@@ -88,7 +85,7 @@ class HomeFragment : Fragment() {
             { nav -> navigationDesc(nav) }
         )
         binding.mainContainer.rvMovies.adapter = adapter
-        binding.mainContainer.rvMovies.layoutManager = GridLayoutManager(activity, 2)
+        binding.mainContainer.rvMovies.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         adapterSort = AdapterSort(context, resources.getStringArray(R.array.sort_array))
         binding.mainContainer.spSort.adapter = adapterSort
@@ -107,14 +104,14 @@ class HomeFragment : Fragment() {
 
     private fun addFavorite(add: HomeMovieModel) {
         viewModel.addFavorite(add)
-        viewModel.getAllLocal()
+        //viewModel.getAllLocal()
         binding.mainContainer.tvBtnFavorite.visibility = View.VISIBLE
         Toast.makeText(context, "Добавлено: ${add.title}", Toast.LENGTH_SHORT).show()
     }
 
     private fun delFavorite(del: HomeMovieModel) {
         viewModel.deleteFavorite(del)
-        viewModel.getAllLocal()
+        //viewModel.getAllLocal()
         Toast.makeText(context, "Удалено: ${del.title}", Toast.LENGTH_SHORT).show()
     }
 

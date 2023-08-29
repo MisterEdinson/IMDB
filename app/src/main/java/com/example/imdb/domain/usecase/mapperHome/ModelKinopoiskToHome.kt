@@ -14,7 +14,7 @@ class ModelKinopoiskToHome {
             title = itemMovie?.name,
             desc = itemMovie?.description,
             year = itemMovie?.year.toString(),
-            poster = itemMovie?.poster?.previewUrl,
+            poster = itemMovie?.poster?.url,
             countries = itemMovie?.countries.toString(),
             genres = itemMovie?.genres.toString(),
             lenght = itemMovie?.movieLength.toString(),
